@@ -16,6 +16,9 @@ export const metadata: Metadata = {
   title: "Zyvanta - Intelligence for Everyday Life",
   description:
     "Advanced AI decision engine for Health, Education, and Agriculture.",
+  icons: {
+    icon: "/favicon.png",
+  },
 };
 
 export default function RootLayout({

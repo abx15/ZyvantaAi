@@ -1,406 +1,250 @@
 "use client";
 
-import React, { useState } from "react";
-import { 
-  Sprout, 
-  Cloud, 
-  Droplets, 
-  Sun, 
-  TrendingUp,
-  AlertTriangle,
-  Calendar,
-  MapPin,
+import {
+  Sprout,
+  CloudRain,
   Thermometer,
-  Wind,
-  Camera,
-  BookOpen,
-  DollarSign,
-  Users,
-  ChevronLeft,
-  Tractor,
-  Wheat,
-  Bug,
-  Flower,
-  Leaf,
-  ThermometerSun
+  Droplets,
+  TrendingUp,
+  Calendar,
+  AlertTriangle,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import Link from "next/link";
-
-const agricultureServices = [
-  {
-    icon: Cloud,
-    title: "Weather Forecast",
-    description: "Hyperlocal weather predictions and farming recommendations",
-    color: "bg-blue-100 text-blue-600"
-  },
-  {
-    icon: Bug,
-    title: "Pest Detection",
-    description: "AI-powered pest identification and treatment suggestions",
-    color: "bg-red-100 text-red-600"
-  },
-  {
-    icon: Droplets,
-    title: "Irrigation Planning",
-    description: "Smart water management and irrigation scheduling",
-    color: "bg-cyan-100 text-cyan-600"
-  },
-  {
-    icon: DollarSign,
-    title: "Market Prices",
-    description: "Real-time crop prices and market trend analysis",
-    color: "bg-green-100 text-green-600"
-  },
-  {
-    icon: Flower,
-    title: "Crop Health",
-    description: "Monitor crop health and disease detection",
-    color: "bg-yellow-100 text-yellow-600"
-  },
-  {
-    icon: BookOpen,
-    title: "Farming Guide",
-    description: "Best practices and modern farming techniques",
-    color: "bg-purple-100 text-purple-600"
-  }
-];
-
-const crops = [
-  { name: "Wheat", icon: Wheat, season: "Rabi", price: "₹2,200/quintal", trend: "+5%" },
-  { name: "Rice", icon: Sprout, season: "Kharif", price: "₹1,900/quintal", trend: "+3%" },
-  { name: "Cotton", icon: Flower, season: "Kharif", price: "₹6,500/quintal", trend: "-2%" },
-  { name: "Pulses", icon: Leaf, season: "Rabi", price: "₹4,500/quintal", trend: "+8%" }
-];
-
-const weatherData = {
-  temperature: "28°C",
-  humidity: "65%",
-  rainfall: "2.5mm",
-  windSpeed: "12 km/h",
-  condition: "Partly Cloudy"
-};
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function AgriculturePage() {
-  const [selectedCrop, setSelectedCrop] = useState<string>("");
-  const [selectedRegion, setSelectedRegion] = useState<string>("");
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-yellow-50">
-      <div className="container mx-auto px-4 py-8">
-        {/* Header */}
-        <header className="flex items-center gap-4 mb-8">
-          <Link href="/">
-            <Button variant="ghost" size="icon">
-              <ChevronLeft />
-            </Button>
-          </Link>
-          <div className="flex items-center gap-3">
-            <div className="p-2 bg-green-100 rounded-full">
-              <Sprout className="h-6 w-6 text-green-600" />
-            </div>
-            <h1 className="text-2xl font-bold text-gray-900">Agriculture Engine</h1>
-          </div>
-        </header>
-
-        {/* Hero Section */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
-            Smart Farming Solutions
-          </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            AI-powered agricultural intelligence for better yields, sustainable farming, and increased profits
-          </p>
-        </div>
-
-        {/* Crop Disease Detection */}
-        <Card className="bg-emerald-50 border-emerald-200 mb-12">
-          <CardHeader>
-            <CardTitle className="text-emerald-700 flex items-center gap-2">
-              <Camera className="w-5 h-5" /> Disease Detection
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-sm text-emerald-600 mb-4">
-              Notice spots on leaves? Upload a photo for instant diagnosis.
+    <div className="min-h-screen bg-gradient-to-br from-green-50/30 to-emerald-50/30">
+      {/* Hero */}
+      <section className="py-20 bg-gradient-to-br from-green-500 to-emerald-600 text-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <Sprout className="w-20 h-20 mx-auto mb-6 opacity-90" />
+            <h1 className="text-5xl md:text-6xl font-bold mb-6">
+              Agriculture Optimizer
+            </h1>
+            <p className="text-xl text-green-100 mb-8">
+              Optimize crop yields, monitor weather patterns, and make
+              data-driven farming decisions with AI.
             </p>
-            <Button className="w-full bg-emerald-600 hover:bg-emerald-700">
-              Take Photo
-            </Button>
-          </CardContent>
-        </Card>
-
-        {/* Weather Widget */}
-        <Card className="mb-12 bg-gradient-to-r from-blue-50 to-cyan-50">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Cloud className="h-5 w-5" />
-              Today's Farming Weather
-            </CardTitle>
-            <CardDescription>
-              Real-time weather conditions optimized for agricultural decisions
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-              <div className="text-center">
-                <Thermometer className="h-8 w-8 text-orange-500 mx-auto mb-2" />
-                <div className="text-lg font-semibold">{weatherData.temperature}</div>
-                <p className="text-sm text-gray-600">Temperature</p>
-              </div>
-              <div className="text-center">
-                <Droplets className="h-8 w-8 text-blue-500 mx-auto mb-2" />
-                <div className="text-lg font-semibold">{weatherData.humidity}</div>
-                <p className="text-sm text-gray-600">Humidity</p>
-              </div>
-              <div className="text-center">
-                <Cloud className="h-8 w-8 text-cyan-500 mx-auto mb-2" />
-                <div className="text-lg font-semibold">{weatherData.rainfall}</div>
-                <p className="text-sm text-gray-600">Rainfall</p>
-              </div>
-              <div className="text-center">
-                <Wind className="h-8 w-8 text-gray-500 mx-auto mb-2" />
-                <div className="text-lg font-semibold">{weatherData.windSpeed}</div>
-                <p className="text-sm text-gray-600">Wind Speed</p>
-              </div>
-              <div className="text-center">
-                <Sun className="h-8 w-8 text-yellow-500 mx-auto mb-2" />
-                <div className="text-lg font-semibold">{weatherData.condition}</div>
-                <p className="text-sm text-gray-600">Condition</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Weather & Soil */}
-        <div className="grid grid-cols-2 gap-4 mb-12">
-          <Card>
-            <CardContent className="pt-6 text-center">
-              <ThermometerSun className="w-8 h-8 mx-auto mb-2 text-orange-500" />
-              <p className="text-xs text-slate-500 uppercase">Weather</p>
-              <p className="text-lg font-bold">32°C</p>
-              <p className="text-[10px] text-slate-400">Clear Skies</p>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardContent className="pt-6 text-center">
-              <Leaf className="w-8 h-8 mx-auto mb-2 text-emerald-500" />
-              <p className="text-xs text-slate-500 uppercase">Soil Moisture</p>
-              <p className="text-lg font-bold">45%</p>
-              <p className="text-[10px] text-slate-400">Optimum</p>
-            </CardContent>
-          </Card>
+          </div>
         </div>
+      </section>
 
-        {/* Market Prices */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">
-            Today's Market Prices
-          </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {crops.map((crop, index) => {
-              const Icon = crop.icon;
-              const isPositive = crop.trend.startsWith('+');
-              return (
-                <Card key={index} className="hover:shadow-lg transition-shadow">
-                  <CardHeader>
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <Icon className="h-6 w-6 text-green-600" />
-                        <CardTitle className="text-lg">{crop.name}</CardTitle>
+      {/* Stats */}
+      <section className="py-12 bg-white border-b">
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-4 gap-6 max-w-5xl mx-auto">
+            <Card>
+              <CardContent className="pt-6 text-center">
+                <Sprout className="w-10 h-10 text-green-600 mx-auto mb-3" />
+                <div className="text-3xl font-bold text-gray-900 mb-1">8</div>
+                <div className="text-sm text-gray-600">Active Crops</div>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardContent className="pt-6 text-center">
+                <TrendingUp className="w-10 h-10 text-blue-600 mx-auto mb-3" />
+                <div className="text-3xl font-bold text-gray-900 mb-1">
+                  +32%
+                </div>
+                <div className="text-sm text-gray-600">Yield Increase</div>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardContent className="pt-6 text-center">
+                <CloudRain className="w-10 h-10 text-indigo-600 mx-auto mb-3" />
+                <div className="text-3xl font-bold text-gray-900 mb-1">
+                  7 Days
+                </div>
+                <div className="text-sm text-gray-600">Weather Forecast</div>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardContent className="pt-6 text-center">
+                <Calendar className="w-10 h-10 text-purple-600 mx-auto mb-3" />
+                <div className="text-3xl font-bold text-gray-900 mb-1">12</div>
+                <div className="text-sm text-gray-600">Pending Tasks</div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Main Features */}
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-8">
+              {/* Crop Management */}
+              <Card className="border-none shadow-xl rounded-3xl overflow-hidden">
+                <CardHeader className="bg-gradient-to-br from-green-500 to-emerald-600 text-white">
+                  <CardTitle className="flex items-center text-2xl">
+                    <Sprout className="w-6 h-6 mr-3" />
+                    Crop Management
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="p-8">
+                  <p className="text-gray-600 mb-6">
+                    Track all your crops, monitor growth stages, and get
+                    AI-powered recommendations for optimal yields.
+                  </p>
+                  <div className="space-y-3 mb-6">
+                    <div className="p-4 bg-green-50 rounded-xl border border-green-100">
+                      <div className="flex items-center justify-between mb-2">
+                        <div className="font-bold text-gray-900">
+                          Wheat (Field A)
+                        </div>
+                        <span className="text-sm bg-green-200 text-green-800 px-3 py-1 rounded-full font-medium">
+                          Growing
+                        </span>
                       </div>
-                      <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                        isPositive ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
-                      }`}>
-                        {crop.trend}
-                      </span>
+                      <div className="text-sm text-gray-600 mb-3">
+                        Planted: 45 days ago • Expected harvest: 30 days
+                      </div>
+                      <div className="w-full bg-green-100 rounded-full h-2">
+                        <div
+                          className="bg-green-600 h-2 rounded-full"
+                          style={{ width: "60%" }}
+                        ></div>
+                      </div>
                     </div>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-2">
-                      <div className="text-xl font-bold text-gray-900">{crop.price}</div>
-                      <p className="text-sm text-gray-600">Season: {crop.season}</p>
-                      <Button variant="outline" size="sm" className="w-full">
-                        View Details
-                      </Button>
+                    <div className="p-4 bg-yellow-50 rounded-xl border border-yellow-100">
+                      <div className="flex items-center justify-between mb-2">
+                        <div className="font-bold text-gray-900">
+                          Rice (Field B)
+                        </div>
+                        <span className="text-sm bg-yellow-200 text-yellow-800 px-3 py-1 rounded-full font-medium">
+                          Needs Attention
+                        </span>
+                      </div>
+                      <div className="text-sm text-gray-600 mb-3">
+                        Planted: 20 days ago • Soil moisture low
+                      </div>
+                      <div className="w-full bg-yellow-100 rounded-full h-2">
+                        <div
+                          className="bg-yellow-600 h-2 rounded-full"
+                          style={{ width: "30%" }}
+                        ></div>
+                      </div>
                     </div>
-                  </CardContent>
-                </Card>
-              );
-            })}
-          </div>
-        </div>
+                  </div>
+                  <Button className="w-full bg-green-600 hover:bg-green-700 rounded-full">
+                    Add New Crop
+                  </Button>
+                </CardContent>
+              </Card>
 
-        {/* Mandi Prices */}
-        <Card className="mb-12">
-          <CardHeader>
-            <CardTitle className="text-sm font-semibold">
-              Live Mandi Prices (Nearby)
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-2">
-            <div className="flex justify-between items-center text-sm border-b pb-2">
-              <span>Wheat</span>
-              <span className="font-bold">₹2,450 / quintal</span>
-            </div>
-            <div className="flex justify-between items-center text-sm border-b pb-2">
-              <span>Mustard</span>
-              <span className="font-bold">₹5,120 / quintal</span>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Crop Advisor */}
-        <Card className="mb-12">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Sprout className="h-5 w-5" />
-              Crop Advisor
-            </CardTitle>
-            <CardDescription>
-              Get personalized recommendations for your crops and region
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="grid md:grid-cols-2 gap-6 mb-6">
-              <div>
-                <label className="block text-sm font-medium mb-2">Select Crop</label>
-                <select 
-                  className="w-full p-2 border rounded-lg"
-                  value={selectedCrop}
-                  onChange={(e) => setSelectedCrop(e.target.value)}
-                >
-                  <option value="">Choose a crop</option>
-                  <option value="wheat">Wheat</option>
-                  <option value="rice">Rice</option>
-                  <option value="cotton">Cotton</option>
-                  <option value="pulses">Pulses</option>
-                  <option value="vegetables">Vegetables</option>
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-2">Select Region</label>
-                <select 
-                  className="w-full p-2 border rounded-lg"
-                  value={selectedRegion}
-                  onChange={(e) => setSelectedRegion(e.target.value)}
-                >
-                  <option value="">Choose your region</option>
-                  <option value="north">North India</option>
-                  <option value="south">South India</option>
-                  <option value="east">East India</option>
-                  <option value="west">West India</option>
-                  <option value="central">Central India</option>
-                </select>
-              </div>
-            </div>
-            <Button className="w-full md:w-auto">
-              Get Recommendations
-            </Button>
-          </CardContent>
-        </Card>
-
-        {/* Services Grid */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">
-            Agriculture Services
-          </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {agricultureServices.map((service, index) => {
-              const Icon = service.icon;
-              return (
-                <Card key={index} className="hover:shadow-lg transition-shadow">
-                  <CardHeader>
-                    <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${service.color}`}>
-                      <Icon className="h-6 w-6" />
+              {/* Weather & Climate */}
+              <Card className="border-none shadow-xl rounded-3xl overflow-hidden">
+                <CardHeader className="bg-gradient-to-br from-blue-500 to-indigo-600 text-white">
+                  <CardTitle className="flex items-center text-2xl">
+                    <CloudRain className="w-6 h-6 mr-3" />
+                    Weather Intelligence
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="p-8">
+                  <p className="text-gray-600 mb-6">
+                    Get hyper-local weather forecasts, rainfall predictions, and
+                    climate insights tailored for farming.
+                  </p>
+                  <div className="bg-blue-50 rounded-2xl p-6 mb-6">
+                    <div className="text-center mb-4">
+                      <CloudRain className="w-16 h-16 text-blue-600 mx-auto mb-3" />
+                      <div className="text-3xl font-bold text-gray-900 mb-1">
+                        28°C
+                      </div>
+                      <div className="text-gray-600">Partly Cloudy</div>
                     </div>
-                    <CardTitle className="text-lg">{service.title}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <CardDescription>{service.description}</CardDescription>
-                    <Button variant="ghost" className="mt-4 p-0 h-auto">
-                      Learn more →
+                    <div className="grid grid-cols-3 gap-4 text-center">
+                      <div>
+                        <Thermometer className="w-5 h-5 text-orange-600 mx-auto mb-2" />
+                        <div className="text-xs text-gray-500">Temp</div>
+                        <div className="font-bold text-gray-900">28°C</div>
+                      </div>
+                      <div>
+                        <Droplets className="w-5 h-5 text-blue-600 mx-auto mb-2" />
+                        <div className="text-xs text-gray-500">Humidity</div>
+                        <div className="font-bold text-gray-900">65%</div>
+                      </div>
+                      <div>
+                        <CloudRain className="w-5 h-5 text-indigo-600 mx-auto mb-2" />
+                        <div className="text-xs text-gray-500">Rain</div>
+                        <div className="font-bold text-gray-900">40%</div>
+                      </div>
+                    </div>
+                  </div>
+                  <Button className="w-full bg-blue-600 hover:bg-blue-700 rounded-full">
+                    7-Day Forecast
+                  </Button>
+                </CardContent>
+              </Card>
+
+              {/* AI Recommendations */}
+              <Card className="border-none shadow-xl rounded-3xl overflow-hidden md:col-span-2">
+                <CardHeader className="bg-gradient-to-br from-purple-500 to-pink-600 text-white">
+                  <CardTitle className="flex items-center text-2xl">
+                    <TrendingUp className="w-6 h-6 mr-3" />
+                    AI Farming Assistant
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="p-8">
+                  <p className="text-gray-600 mb-6">
+                    Get personalized farming advice, optimal planting schedules,
+                    and pest control recommendations.
+                  </p>
+                  <div className="space-y-4 mb-6">
+                    <div className="bg-green-50 rounded-xl p-6 border-l-4 border-green-600">
+                      <div className="flex items-start space-x-3">
+                        <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                          <TrendingUp className="w-5 h-5 text-green-600" />
+                        </div>
+                        <div className="flex-1">
+                          <div className="font-bold text-gray-900 mb-2">
+                            Yield Optimization Tip
+                          </div>
+                          <div className="text-gray-700 text-sm">
+                            Based on soil analysis, increasing nitrogen content
+                            by 15% in Field A could boost wheat yield by 20-25%.
+                            Consider organic fertilizers for best results.
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="bg-yellow-50 rounded-xl p-6 border-l-4 border-yellow-600">
+                      <div className="flex items-start space-x-3">
+                        <div className="w-10 h-10 bg-yellow-100 rounded-full flex items-center justify-center flex-shrink-0">
+                          <AlertTriangle className="w-5 h-5 text-yellow-600" />
+                        </div>
+                        <div className="flex-1">
+                          <div className="font-bold text-gray-900 mb-2">
+                            Pest Alert
+                          </div>
+                          <div className="text-gray-700 text-sm">
+                            Weather conditions favorable for aphid activity in
+                            the next 3 days. Monitor rice crops closely and
+                            apply preventive measures if needed.
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex space-x-3">
+                    <input
+                      type="text"
+                      placeholder="Ask farming questions..."
+                      className="flex-1 px-4 py-3 border border-gray-200 rounded-full focus:ring-2 focus:ring-purple-500 outline-none"
+                    />
+                    <Button className="bg-purple-600 hover:bg-purple-700 rounded-full px-8">
+                      Ask AI
                     </Button>
-                  </CardContent>
-                </Card>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Farming Alerts */}
-        <Card className="mb-12 border-orange-200 bg-orange-50">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-orange-700">
-              <AlertTriangle className="h-5 w-5" />
-              Farming Alerts
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-3">
-              <div className="flex items-start gap-3 p-3 bg-white rounded-lg">
-                <div className="w-2 h-2 bg-red-500 rounded-full mt-2"></div>
-                <div>
-                  <h4 className="font-medium text-sm">Pest Alert: Locusts</h4>
-                  <p className="text-xs text-gray-600">High risk in western regions. Take preventive measures.</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-3 p-3 bg-white rounded-lg">
-                <div className="w-2 h-2 bg-yellow-500 rounded-full mt-2"></div>
-                <div>
-                  <h4 className="font-medium text-sm">Weather Warning</h4>
-                  <p className="text-xs text-gray-600">Heavy rainfall expected in next 48 hours.</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-3 p-3 bg-white rounded-lg">
-                <div className="w-2 h-2 bg-green-500 rounded-full mt-2"></div>
-                <div>
-                  <h4 className="font-medium text-sm">Optimal Planting Time</h4>
-                  <p className="text-xs text-gray-600">Best conditions for wheat planting this week.</p>
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Farming Resources */}
-        <div className="bg-green-50 rounded-xl p-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">
-            Farming Resources
-          </h2>
-          <div className="grid md:grid-cols-4 gap-6">
-            <div className="text-center">
-              <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mx-auto mb-3">
-                <Camera className="h-6 w-6 text-green-600" />
-              </div>
-              <h4 className="font-medium mb-1">Crop Scanner</h4>
-              <p className="text-sm text-gray-600">AI disease detection</p>
-            </div>
-            <div className="text-center">
-              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-3">
-                <Calendar className="h-6 w-6 text-blue-600" />
-              </div>
-              <h4 className="font-medium mb-1">Farm Calendar</h4>
-              <p className="text-sm text-gray-600">Planting schedules</p>
-            </div>
-            <div className="text-center">
-              <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mx-auto mb-3">
-                <Users className="h-6 w-6 text-purple-600" />
-              </div>
-              <h4 className="font-medium mb-1">Expert Connect</h4>
-              <p className="text-sm text-gray-600">Talk to agronomists</p>
-            </div>
-            <div className="text-center">
-              <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mx-auto mb-3">
-                <Tractor className="h-6 w-6 text-orange-600" />
-              </div>
-              <h4 className="font-medium mb-1">Equipment</h4>
-              <p className="text-sm text-gray-600">Modern tools guide</p>
+                  </div>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 }

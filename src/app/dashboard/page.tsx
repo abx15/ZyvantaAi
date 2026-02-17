@@ -1,310 +1,354 @@
 "use client";
 
-import React, { useState } from "react";
-import { 
-  BarChart3, 
-  TrendingUp, 
-  Users, 
-  Activity,
-  Calendar,
-  Clock,
-  Brain,
+import {
+  BarChart3,
   Heart,
   BookOpen,
   Sprout,
-  ChevronLeft,
-  Settings,
+  TrendingUp,
+  Calendar,
   Bell,
-  Search,
-  Filter,
-  User as UserIcon
+  Activity,
 } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
 
-const stats = [
-  {
-    title: "Total Queries",
-    value: "1,234",
-    change: "+12%",
-    icon: Brain,
-    color: "text-blue-600",
-    bgColor: "bg-blue-100"
-  },
-  {
-    title: "Health Checks",
-    value: "45",
-    change: "+8%",
-    icon: Heart,
-    color: "text-red-600",
-    bgColor: "bg-red-100"
-  },
-  {
-    title: "Study Sessions",
-    value: "89",
-    change: "+23%",
-    icon: BookOpen,
-    color: "text-green-600",
-    bgColor: "bg-green-100"
-  },
-  {
-    title: "Farm Analysis",
-    value: "12",
-    change: "+5%",
-    icon: Sprout,
-    color: "text-yellow-600",
-    bgColor: "bg-yellow-100"
-  }
-];
-
-const recentActivity = [
-  {
-    id: 1,
-    type: "AI Query",
-    description: "Asked about investment strategies",
-    time: "2 minutes ago",
-    icon: Brain,
-    color: "text-blue-600"
-  },
-  {
-    id: 2,
-    type: "Health Check",
-    description: "Completed symptom analysis",
-    time: "1 hour ago",
-    icon: Heart,
-    color: "text-red-600"
-  },
-  {
-    id: 3,
-    type: "Study Progress",
-    description: "Completed mathematics module",
-    time: "3 hours ago",
-    icon: BookOpen,
-    color: "text-green-600"
-  },
-  {
-    id: 4,
-    type: "Crop Analysis",
-    description: "Checked wheat disease symptoms",
-    time: "1 day ago",
-    icon: Sprout,
-    color: "text-yellow-600"
-  }
-];
-
-const upcomingTasks = [
-  {
-    title: "Complete UPSC Study Module",
-    due: "Today",
-    priority: "high",
-    category: "Education"
-  },
-  {
-    title: "Follow-up Health Check",
-    due: "Tomorrow",
-    priority: "medium",
-    category: "Health"
-  },
-  {
-    title: "Review Crop Market Prices",
-    due: "This Week",
-    priority: "low",
-    category: "Agriculture"
-  }
-];
-
 export default function DashboardPage() {
-  const [selectedPeriod, setSelectedPeriod] = useState("week");
-
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="container mx-auto px-4 py-8">
-        {/* Header */}
-        <header className="flex items-center justify-between mb-8">
-          <div className="flex items-center gap-4">
-            <Link href="/">
-              <Button variant="ghost" size="icon">
-                <ChevronLeft />
-              </Button>
-            </Link>
+      {/* Header */}
+      <section className="bg-white border-b py-8">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900">Dashboard</h1>
-              <p className="text-sm text-gray-600">Welcome back! Here's your activity overview.</p>
+              <h1 className="text-4xl font-bold text-gray-900 mb-2">
+                Dashboard
+              </h1>
+              <p className="text-gray-600">
+                Welcome back! Here's your personalized overview.
+              </p>
+            </div>
+            <div className="relative">
+              <Button variant="outline" className="rounded-full">
+                <Bell className="w-5 h-5 mr-2" />
+                Notifications
+                <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">
+                  3
+                </span>
+              </Button>
             </div>
           </div>
-          <div className="flex items-center gap-2">
-            <Button variant="outline" size="sm">
-              <Search className="h-4 w-4" />
-            </Button>
-            <Button variant="outline" size="sm">
-              <Bell className="h-4 w-4" />
-            </Button>
-            <Button variant="outline" size="sm">
-              <Settings className="h-4 w-4" />
-            </Button>
-          </div>
-        </header>
+        </div>
+      </section>
 
-        {/* Stats Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          {stats.map((stat, index) => {
-            const Icon = stat.icon;
-            return (
-              <Card key={index}>
-                <CardContent className="p-6">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="text-sm font-medium text-gray-600">{stat.title}</p>
-                      <p className="text-2xl font-bold text-gray-900">{stat.value}</p>
-                      <p className="text-sm text-green-600">{stat.change}</p>
+      {/* Main Content */}
+      <section className="py-12">
+        <div className="container mx-auto px-4">
+          <div className="grid lg:grid-cols-3 gap-8">
+            {/* Left Column - Stats */}
+            <div className="lg:col-span-2 space-y-8">
+              {/* Quick Stats */}
+              <div className="grid md:grid-cols-3 gap-6">
+                <Card className="border-none shadow-lg">
+                  <CardContent className="pt-6">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <div className="text-sm text-gray-500 mb-1">
+                          AI Queries
+                        </div>
+                        <div className="text-3xl font-bold text-gray-900">
+                          248
+                        </div>
+                        <div className="text-xs text-green-600 mt-1">
+                          +12% this week
+                        </div>
+                      </div>
+                      <div className="w-14 h-14 bg-purple-100 rounded-full flex items-center justify-center">
+                        <Activity className="w-7 h-7 text-purple-600" />
+                      </div>
                     </div>
-                    <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${stat.bgColor}`}>
-                      <Icon className={`h-6 w-6 ${stat.color}`} />
+                  </CardContent>
+                </Card>
+
+                <Card className="border-none shadow-lg">
+                  <CardContent className="pt-6">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <div className="text-sm text-gray-500 mb-1">
+                          Health Score
+                        </div>
+                        <div className="text-3xl font-bold text-gray-900">
+                          92%
+                        </div>
+                        <div className="text-xs text-green-600 mt-1">
+                          Excellent
+                        </div>
+                      </div>
+                      <div className="w-14 h-14 bg-red-100 rounded-full flex items-center justify-center">
+                        <Heart className="w-7 h-7 text-red-600" />
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card className="border-none shadow-lg">
+                  <CardContent className="pt-6">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <div className="text-sm text-gray-500 mb-1">
+                          Active Tasks
+                        </div>
+                        <div className="text-3xl font-bold text-gray-900">
+                          17
+                        </div>
+                        <div className="text-xs text-blue-600 mt-1">
+                          5 due today
+                        </div>
+                      </div>
+                      <div className="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center">
+                        <Calendar className="w-7 h-7 text-blue-600" />
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+
+              {/* Domain Overview */}
+              <Card className="border-none shadow-lg rounded-3xl">
+                <CardHeader>
+                  <CardTitle className="flex items-center text-2xl">
+                    <BarChart3 className="w-6 h-6 mr-3 text-blue-600" />
+                    Domain Activity
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-6">
+                    <div>
+                      <div className="flex items-center justify-between mb-3">
+                        <div className="flex items-center">
+                          <Heart className="w-5 h-5 text-red-600 mr-2" />
+                          <span className="font-medium text-gray-900">
+                            Health
+                          </span>
+                        </div>
+                        <span className="text-sm font-bold text-gray-900">
+                          127 logs
+                        </span>
+                      </div>
+                      <div className="w-full bg-gray-200 rounded-full h-3">
+                        <div
+                          className="bg-red-500 h-3 rounded-full"
+                          style={{ width: "75%" }}
+                        ></div>
+                      </div>
+                    </div>
+
+                    <div>
+                      <div className="flex items-center justify-between mb-3">
+                        <div className="flex items-center">
+                          <BookOpen className="w-5 h-5 text-blue-600 mr-2" />
+                          <span className="font-medium text-gray-900">
+                            Education
+                          </span>
+                        </div>
+                        <span className="text-sm font-bold text-gray-900">
+                          64 activities
+                        </span>
+                      </div>
+                      <div className="w-full bg-gray-200 rounded-full h-3">
+                        <div
+                          className="bg-blue-500 h-3 rounded-full"
+                          style={{ width: "55%" }}
+                        ></div>
+                      </div>
+                    </div>
+
+                    <div>
+                      <div className="flex items-center justify-between mb-3">
+                        <div className="flex items-center">
+                          <Sprout className="w-5 h-5 text-green-600 mr-2" />
+                          <span className="font-medium text-gray-900">
+                            Agriculture
+                          </span>
+                        </div>
+                        <span className="text-sm font-bold text-gray-900">
+                          42 updates
+                        </span>
+                      </div>
+                      <div className="w-full bg-gray-200 rounded-full h-3">
+                        <div
+                          className="bg-green-500 h-3 rounded-full"
+                          style={{ width: "40%" }}
+                        ></div>
+                      </div>
                     </div>
                   </div>
                 </CardContent>
               </Card>
-            );
-          })}
-        </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-          {/* Recent Activity */}
-          <Card className="lg:col-span-2">
-            <CardHeader>
-              <div className="flex items-center justify-between">
-                <CardTitle className="flex items-center gap-2">
-                  <Activity className="h-5 w-5" />
-                  Recent Activity
-                </CardTitle>
-                <Button variant="outline" size="sm">
-                  <Filter className="h-4 w-4" />
-                </Button>
-              </div>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                {recentActivity.map((activity) => {
-                  const Icon = activity.icon;
-                  return (
-                    <div key={activity.id} className="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors">
-                      <div className={`w-8 h-8 rounded-lg flex items-center justify-center bg-gray-100`}>
-                        <Icon className={`h-4 w-4 ${activity.color}`} />
+              {/* Recent Activity */}
+              <Card className="border-none shadow-lg rounded-3xl">
+                <CardHeader>
+                  <CardTitle className="flex items-center text-2xl">
+                    <Activity className="w-6 h-6 mr-3 text-purple-600" />
+                    Recent Activity
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    <div className="flex items-start space-x-4 p-4 bg-gray-50 rounded-xl">
+                      <div className="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
+                        <Heart className="w-5 h-5 text-red-600" />
                       </div>
                       <div className="flex-1">
-                        <div className="flex items-center justify-between">
-                          <h4 className="font-medium text-sm">{activity.type}</h4>
-                          <span className="text-xs text-gray-500">{activity.time}</span>
+                        <div className="font-medium text-gray-900">
+                          Health Log Added
                         </div>
-                        <p className="text-sm text-gray-600">{activity.description}</p>
+                        <div className="text-sm text-gray-600">
+                          Blood pressure reading recorded for John Doe
+                        </div>
+                        <div className="text-xs text-gray-400 mt-1">
+                          2 hours ago
+                        </div>
                       </div>
                     </div>
-                  );
-                })}
-              </div>
-            </CardContent>
-          </Card>
 
-          {/* Upcoming Tasks */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Calendar className="h-5 w-5" />
-                Upcoming Tasks
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-3">
-                {upcomingTasks.map((task, index) => (
-                  <div key={index} className="p-3 rounded-lg border">
-                    <div className="flex items-start justify-between mb-2">
-                      <h4 className="font-medium text-sm">{task.title}</h4>
-                      <span className={`px-2 py-1 rounded-full text-xs ${
-                        task.priority === 'high' ? 'bg-red-100 text-red-700' :
-                        task.priority === 'medium' ? 'bg-yellow-100 text-yellow-700' :
-                        'bg-green-100 text-green-700'
-                      }`}>
-                        {task.priority}
-                      </span>
+                    <div className="flex items-start space-x-4 p-4 bg-gray-50 rounded-xl">
+                      <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                        <BookOpen className="w-5 h-5 text-blue-600" />
+                      </div>
+                      <div className="flex-1">
+                        <div className="font-medium text-gray-900">
+                          Study Progress Updated
+                        </div>
+                        <div className="text-sm text-gray-600">
+                          Math assignment completed - 95% score
+                        </div>
+                        <div className="text-xs text-gray-400 mt-1">
+                          5 hours ago
+                        </div>
+                      </div>
                     </div>
-                    <div className="flex items-center justify-between text-xs text-gray-500">
-                      <span>{task.category}</span>
-                      <span>{task.due}</span>
+
+                    <div className="flex items-start space-x-4 p-4 bg-gray-50 rounded-xl">
+                      <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                        <Sprout className="w-5 h-5 text-green-600" />
+                      </div>
+                      <div className="flex-1">
+                        <div className="font-medium text-gray-900">
+                          Crop Status Update
+                        </div>
+                        <div className="text-sm text-gray-600">
+                          Wheat in Field A reached 60% growth stage
+                        </div>
+                        <div className="text-xs text-gray-400 mt-1">
+                          1 day ago
+                        </div>
+                      </div>
                     </div>
                   </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Right Column - Quick Actions */}
+            <div className="space-y-8">
+              {/* Quick Actions */}
+              <Card className="border-none shadow-lg rounded-3xl">
+                <CardHeader>
+                  <CardTitle>Quick Actions</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <Link href="/health">
+                    <Button
+                      variant="outline"
+                      className="w-full justify-start rounded-xl h-12"
+                    >
+                      <Heart className="w-5 h-5 mr-3 text-red-600" />
+                      Add Health Log
+                    </Button>
+                  </Link>
+                  <Link href="/education">
+                    <Button
+                      variant="outline"
+                      className="w-full justify-start rounded-xl h-12"
+                    >
+                      <BookOpen className="w-5 h-5 mr-3 text-blue-600" />
+                      Track Progress
+                    </Button>
+                  </Link>
+                  <Link href="/agriculture">
+                    <Button
+                      variant="outline"
+                      className="w-full justify-start rounded-xl h-12"
+                    >
+                      <Sprout className="w-5 h-5 mr-3 text-green-600" />
+                      Update Crops
+                    </Button>
+                  </Link>
+                  <Link href="/ai">
+                    <Button className="w-full rounded-xl h-12 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700">
+                      <Activity className="w-5 h-5 mr-3" />
+                      Ask AI Anything
+                    </Button>
+                  </Link>
+                </CardContent>
+              </Card>
+
+              {/* Upcoming Tasks */}
+              <Card className="border-none shadow-lg rounded-3xl">
+                <CardHeader>
+                  <CardTitle className="flex items-center">
+                    <Calendar className="w-5 h-5 mr-2 text-blue-600" />
+                    Upcoming Tasks
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div className="p-4 bg-red-50 rounded-xl border-l-4 border-red-500">
+                    <div className="font-medium text-gray-900 text-sm mb-1">
+                      Dental Checkup
+                    </div>
+                    <div className="text-xs text-gray-600">
+                      Tomorrow, 3:00 PM
+                    </div>
+                  </div>
+                  <div className="p-4 bg-blue-50 rounded-xl border-l-4 border-blue-500">
+                    <div className="font-medium text-gray-900 text-sm mb-1">
+                      Math Assignment Due
+                    </div>
+                    <div className="text-xs text-gray-600">In 2 days</div>
+                  </div>
+                  <div className="p-4 bg-green-50 rounded-xl border-l-4 border-green-500">
+                    <div className="font-medium text-gray-900 text-sm mb-1">
+                      Fertilizer Application
+                    </div>
+                    <div className="text-xs text-gray-600">In 3 days</div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Insights */}
+              <Card className="border-none shadow-lg rounded-3xl bg-gradient-to-br from-purple-500 to-pink-600 text-white">
+                <CardContent className="p-6">
+                  <TrendingUp className="w-10 h-10 mb-4 opacity-90" />
+                  <div className="font-bold text-lg mb-2">Weekly Insights</div>
+                  <div className="text-purple-100 text-sm mb-4">
+                    You're 23% more active this week! Keep up the great progress
+                    across all domains.
+                  </div>
+                  <Button
+                    variant="outline"
+                    className="border-white text-white hover:bg-white/10 rounded-full w-full"
+                  >
+                    View Details
+                  </Button>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
         </div>
-
-        {/* Quick Actions */}
-        <Card className="mb-8">
-          <CardHeader>
-            <CardTitle>Quick Actions</CardTitle>
-            <CardDescription>
-              Frequently used features and services
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <Button variant="outline" className="h-20 flex-col gap-2">
-                <Brain className="h-6 w-6" />
-                <span className="text-sm">Ask AI</span>
-              </Button>
-              <Button variant="outline" className="h-20 flex-col gap-2">
-                <Heart className="h-6 w-6" />
-                <span className="text-sm">Health Check</span>
-              </Button>
-              <Button variant="outline" className="h-20 flex-col gap-2">
-                <BookOpen className="h-6 w-6" />
-                <span className="text-sm">Study Mode</span>
-              </Button>
-              <Button variant="outline" className="h-20 flex-col gap-2">
-                <Sprout className="h-6 w-6" />
-                <span className="text-sm">Farm Analysis</span>
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Usage Chart */}
-        <Card>
-          <CardHeader>
-            <div className="flex items-center justify-between">
-              <div>
-                <CardTitle className="flex items-center gap-2">
-                  <BarChart3 className="h-5 w-5" />
-                  Usage Analytics
-                </CardTitle>
-                <CardDescription>
-                  Track your activity across all services
-                </CardDescription>
-              </div>
-              <select 
-                className="px-3 py-1 border rounded-lg text-sm"
-                value={selectedPeriod}
-                onChange={(e) => setSelectedPeriod(e.target.value)}
-              >
-                <option value="day">Today</option>
-                <option value="week">This Week</option>
-                <option value="month">This Month</option>
-                <option value="year">This Year</option>
-              </select>
-            </div>
-          </CardHeader>
-          <CardContent>
-            <div className="h-64 flex items-center justify-center bg-gray-50 rounded-lg">
-              <div className="text-center">
-                <BarChart3 className="h-12 w-12 text-gray-400 mx-auto mb-2" />
-                <p className="text-gray-600">Analytics Chart</p>
-                <p className="text-sm text-gray-500">Usage statistics will appear here</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+      </section>
     </div>
   );
 }
