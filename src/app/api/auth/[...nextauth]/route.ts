@@ -13,23 +13,54 @@ export const authOptions: NextAuthOptions = {
                 password: { label: "Password", type: "password" },
             },
             async authorize(credentials) {
-                if (!credentials?.email || !credentials?.password) return null;
-
-                const user = await prisma.user.findUnique({
-                    where: { email: credentials.email },
+                console.log('🔍 NextAuth authorize called');
+                console.log('Credentials:', { email: credentials?.email, password: credentials?.password ? '***' : 'missing' });
+                console.log('Environment check:', {
+                    secret: !!process.env.NEXTAUTH_SECRET,
+                    url: process.env.NEXTAUTH_URL,
+                    database: !!process.env.DATABASE_URL
                 });
+                
+                if (!credentials?.email || !credentials?.password) {
+                    console.log('❌ Missing credentials');
+                    return null;
+                }
 
-                if (!user || !user.password) return null;
+                try {
+                    console.log('🔍 Searching for user:', credentials.email);
+                    const user = await prisma.user.findUnique({
+                        where: { email: credentials.email },
+                    });
 
-                const isValid = await bcrypt.compare(credentials.password, user.password);
-                if (!isValid) return null;
+                    console.log('User found:', !!user);
+                    
+                    if (!user || !user.password) {
+                        console.log('❌ User not found or no password');
+                        return null;
+                    }
 
-                return {
-                    id: user.id,
-                    email: user.email,
-                    name: user.name,
-                    role: user.role,
-                };
+                    console.log('🔍 Comparing password...');
+                    const isValid = await bcrypt.compare(credentials.password, user.password);
+                    console.log('Password valid:', isValid);
+                    
+                    if (!isValid) {
+                        console.log('❌ Invalid password');
+                        return null;
+                    }
+
+                    const result = {
+                        id: user.id,
+                        email: user.email,
+                        name: user.name,
+                        role: user.role,
+                    };
+                    
+                    console.log('✅ Authorization successful:', result);
+                    return result;
+                } catch (error) {
+                    console.error('❌ Authorize error:', error);
+                    return null;
+                }
             },
         }),
     ],
@@ -56,6 +87,7 @@ export const authOptions: NextAuthOptions = {
         strategy: "jwt",
     },
     secret: process.env.NEXTAUTH_SECRET,
+    debug: process.env.NODE_ENV === 'development',
 };
 
 const handler = NextAuth(authOptions);
