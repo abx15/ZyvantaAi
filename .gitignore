@@ -62,3 +62,31 @@ next-env.d.ts
 Thumbs.db
 ehthumbs.db
 Desktop.ini
+
+# Database and testing scripts (keep local)
+/scripts/
+/seed-only-neon.ts
+/check-databases.ts
+/test-auth.ts
+/test-nextauth.ts
+/debug-auth.ts
+/test-endpoint.ts
+/test-all-auth.ts
+/comprehensive-auth-test.ts
+/final-debug-instructions.ts
+/final-verification.ts
+/test-login-flow.ts
+/debug-credentials.ts
+/test-nextauth-direct.ts
+/final-auth-summary.ts
+
+# Login details (keep local)
+/LOGIN_DETAILS.md
+
+# Test pages (keep local)
+/src/app/test-auth/
+/src/app/test-all-auth/
+
+# Database seed files (keep local)
+/src/lib/mongoSeed.ts
+/src/lib/redisSeed.ts

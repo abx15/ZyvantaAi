@@ -26,19 +26,26 @@ export default function LoginPage() {
     setIsLoading(true);
 
     try {
+      console.log('🔍 Attempting login with:', { email, password: '***' });
+      
       const result = await signIn("credentials", {
         email,
         password,
         redirect: false,
       });
 
+      console.log('📋 SignIn result:', result);
+
       if (result?.error) {
+        console.log('❌ Login error:', result.error);
         toast.error("Invalid credentials");
       } else {
+        console.log('✅ Login successful, redirecting to dashboard');
         toast.success("Logged in successfully");
         router.push("/dashboard");
       }
     } catch (error) {
+      console.log('❌ Login exception:', error);
       toast.error("Login failed. Please try again.");
     } finally {
       setIsLoading(false);
