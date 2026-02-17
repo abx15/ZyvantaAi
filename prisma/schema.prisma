@@ -1,0 +1,84 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  USER
+  ADMIN
+  AUTHORITY
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  password      String?
+  name          String?
+  image         String?
+  role          Role      @default(USER)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  familyMembers FamilyMember[]
+  tasks         Task[]
+  reminders     Reminder[]
+}
+
+model FamilyMember {
+  id        String   @id @default(cuid())
+  name      String
+  relation  String
+  age       Int?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+}
+
+model Hospital {
+  id        String   @id @default(cuid())
+  name      String
+  location  String
+  contact   String?
+  createdAt DateTime @default(now())
+}
+
+model School {
+  id        String   @id @default(cuid())
+  name      String
+  location  String
+  contact   String?
+  createdAt DateTime @default(now())
+}
+
+model Crop {
+  id          String   @id @default(cuid())
+  name        String
+  variety     String?
+  season      String?
+  description String?
+  createdAt   DateTime @default(now())
+}
+
+model Task {
+  id          String    @id @default(cuid())
+  title       String
+  description String?
+  status      String    @default("PENDING")
+  dueDate     DateTime?
+  userId      String
+  user        User      @relation(fields: [userId], references: [id])
+  createdAt   DateTime  @default(now())
+}
+
+model Reminder {
+  id        String   @id @default(cuid())
+  title     String
+  time      DateTime
+  type      String   // e.g., "MEDICINE", "IRRIGATION", "STUDY"
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+}

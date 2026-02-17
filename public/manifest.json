@@ -1,0 +1,21 @@
+{
+  "name": "Zyvanta - Intelligence for Everyday Life",
+  "short_name": "Zyvanta",
+  "description": "Intelligent web platform for Health, Education, and Agriculture decisions.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0f172a",
+  "icons": [
+    {
+      "src": "/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
